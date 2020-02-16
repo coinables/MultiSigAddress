@@ -232,6 +232,7 @@
 			<div id="output">		
 			
 			</div>
+			<center><a href="#showhidepub" id="showhidepub" class="btn">Show/Hide Public Keys</a></center>
 			<div id="redeem"></div>
             
 		<br>
@@ -348,6 +349,21 @@
 		//update private key and qr code to this key
 		document.getElementById("thispk").innerHTML = '<br><div class="panel panel-danger"><div class="panel-headingd"><h3 class="panel-title">Private Key #'+(counterstart+1)+'</h3></div><div class="panel-body">' + document.getElementById(counterstart).value + '</div></div>';
 		new QRCode(document.getElementById("qrcodepk"), document.getElementById(counterstart).value);
+   }
+   
+   var showhide = document.getElementById("showhidepub");
+   
+   outputshow = true;
+   
+   showhide.onclick = function(){
+		if(outputshow){
+			document.getElementById("output").style.display = "none";
+			outputshow = false;
+		} else {
+			document.getElementById("output").style.display = "block";
+			outputshow = true;
+		}
+		
    }
    
    </script>
