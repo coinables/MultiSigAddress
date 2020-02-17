@@ -123,12 +123,7 @@
         font-size: 21px;
         border: 1px solid #999;
         box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
-		cursor: pointer;
     }
-	.btn:hover{
-		background-color: #5DADE2;
-		color: #fff;
-	}
     #progbar{
         background-color: #5DADE2;
         height: 20px;
@@ -237,15 +232,15 @@
 			<div id="output">		
 			
 			</div>
-			<center><a href="#showhidepub" id="showhidepub" class="btn">Show/Hide Public Keys</a></center>
 			<div id="redeem"></div>
             
 		<br>
 		<br>
-		Donate: 3KsYYnXoQGjY5qV546Gpv5zdpqe5BCfmfS
+		Donate: 3PmAECWsic822v8bgHmJecJ9DzLfXkTKrP
 		<br>
 		<br>
     <!-- footer -->
+    <a href="https://bitcoincore.org/en/segwit_adoption/"><span class="label-default"><span id="wit">SEG</span>WIT</span></a>
     <a href="https://github.com/coinables/multisigaddress"><span class="label-primary">OPEN SOURCE</span></a>
     <a href="https://github.com/bitcoinjs/bitcoinjs-lib"><span class="label-success">BITCOINJS</span></a>
    
@@ -353,21 +348,6 @@
 		//update private key and qr code to this key
 		document.getElementById("thispk").innerHTML = '<br><div class="panel panel-danger"><div class="panel-headingd"><h3 class="panel-title">Private Key #'+(counterstart+1)+'</h3></div><div class="panel-body">' + document.getElementById(counterstart).value + '</div></div>';
 		new QRCode(document.getElementById("qrcodepk"), document.getElementById(counterstart).value);
-   }
-   
-   var showhide = document.getElementById("showhidepub");
-   
-   outputshow = true;
-   
-   showhide.onclick = function(){
-		if(outputshow){
-			document.getElementById("output").style.display = "none";
-			outputshow = false;
-		} else {
-			document.getElementById("output").style.display = "block";
-			outputshow = true;
-		}
-		
    }
    
    </script>
