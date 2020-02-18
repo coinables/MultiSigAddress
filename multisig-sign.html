@@ -1,8 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Bitcoinjs-lib -->
 <script type="text/javascript" src="bitcoin.js"></script>
+<!-- buffer for redeemscript -->
 <script type="text/javascript" src="buffer.js"></script>
+<!-- QRCode Webcam Scanner -->
+<script type="text/javascript" src="instascan.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="jquery.js"></script>
+<style>
+body, html {
+	padding: 12px;
+	font-family: "Verdana", "sans-serif";
+}
+a:link {
+text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+#share{
+	color: green;
+	font-size: 28px;
+	font-weight: bold;
+}
+#keep{
+	color: red;
+	font-size: 28px;
+	font-weight: bold;
+}
+#sweepcont{
+	width: 60%;
+}
+#wit{
+	background-color: black;
+	color: #ffeeff;
+}
+.label-default{
+	padding: 3px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	text-decoration: none;
+	color: #222;
+}
+.label-primary{
+	padding: 3px;
+	border: 1px solid #0088ff;
+	background-color: #0088ff;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+.label-success{
+	padding: 3px;
+	border: 1px solid #52BE80;
+	background-color: #52BE80;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+.label-reference{
+	padding: 3px;
+	border: 1px solid #333;
+	background-color: grey;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+#qrcam{
+	display: none;
+}
+#qrnotify{
+        display: none;
+}
+ #qrnotify2{
+	display: none;
+}
+.hr {
+	height: 6px;
+	border: 0;
+	box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+.well{
+	padding: 16px;
+	border: 2px solid #aaa;
+	border-radius: 3px;
+	background-color: #ddd;
+	color: #000;
+	box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+input, select, option{
+	width: 60%;
+	border-radius: 4px; 
+	background-color: #eee;
+	padding: 7px;
+	font-size: 21px;
+	border: 1px solid #999;
+}
+.btn{
+	border-radius: 4px; 
+	background-color: #fff;
+	padding: 7px;
+	font-size: 21px;
+	border: 1px solid #999;
+	box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+#progbar{
+	background-color: #5DADE2;
+	height: 20px;
+}
+.panel-primary{
+	border: 2px solid #5DADE2;
+	border-radius: 3px;
+}
+.panel-heading{
+	background-color: #5DADE2;
+	color: #fff;
+	padding: 5px;
+}
+.panel-danger{
+	border: 2px solid #EC7063;
+	border-radius: 3px;
+}
+.panel-headingd{
+	background-color: #EC7063;
+	color: #fff;
+	padding: 5px;
+}
+.panel-body{
+	padding: 3px;
+}
+</style>
 </head>
 <body>
 
@@ -10,11 +140,12 @@
 <b>Select Network:</b> <select id="networkselect"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select>
 <br>
 <b>Redeem Script:</b> <input type="text" id="redeem"><br>
-<b>WIF Private Key:</b> <input type="text" id="wifpk"><br>
-<textarea id="hexin" cols="100" rows="10"></textarea><br>
-<button id="signInc" onclick="return signIncomplete();">Sign Incomplete</button> <button id="signLast" onclick="return sign();">Last Signature</button>
+<b>WIF Private Key:</b> <input type="text" id="wifpk"><button class="btn btn-default" onClick="return turnOnWC();">SCAN WITH WEBCAM</button><span id="qrnotify" class="label label-success">QR CODE SCANNED</span>
+<video id="qrcam"></video><br>
+<textarea id="hexin" cols="100" rows="10">Paste In Unsigned Transaction Hex</textarea><br>
+<button id="signInc" onclick="return signIncomplete();" class="btn">Sign Incomplete</button> <button id="signLast" onclick="return sign();" class="btn">Last Signature</button>
 <br><br>
-<textarea id="hexout" cols="100" rows="10"></textarea><br>
+<textarea id="hexout" cols="100" rows="10" readonly></textarea><br>
 <script>
 
 /*
@@ -84,6 +215,30 @@ function signTx(){
 	const tx = txb.build();
 	document.getElementById("hexout").value = tx.toHex();
 }
+
+function turnOnWC(){
+    $("#qrcam").css("display","block");
+    var qr = new Instascan.Scanner({
+    video: document.getElementById("qrcam")
+    });
+
+    qr.addListener('scan', function(data){
+        document.getElementById("wifpk").value = data;
+        if(document.getElementById("wifpk").value.length > 20){
+            qr.stop();
+             $("#qrcam").css("display","none");
+            $("#qrnotify").css("display","block");
+        }
+    });    
+
+    Instascan.Camera.getCameras().then(function(cams){
+        qr.start(cams[0]);
+    }).catch(function(err){
+        console.log(err);
+    });    
+}   
+
+
 
 </script>
 

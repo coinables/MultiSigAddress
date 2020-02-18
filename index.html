@@ -124,6 +124,10 @@
         border: 1px solid #999;
         box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
     }
+	.btn:hover{
+		background-color: #5DADE2;
+		color: #fff;
+	}
     #progbar{
         background-color: #5DADE2;
         height: 20px;
@@ -232,6 +236,7 @@
 			<div id="output">		
 			
 			</div>
+			<center><a href="#showhidepub" id="showhidepub" class="btn">Show/Hide Public Keys</a></center>
 			<div id="redeem"></div>
             
 		<br>
@@ -240,11 +245,25 @@
 		<br>
 		<br>
     <!-- footer -->
-    <a href="https://bitcoincore.org/en/segwit_adoption/"><span class="label-default"><span id="wit">SEG</span>WIT</span></a>
     <a href="https://github.com/coinables/multisigaddress"><span class="label-primary">OPEN SOURCE</span></a>
     <a href="https://github.com/bitcoinjs/bitcoinjs-lib"><span class="label-success">BITCOINJS</span></a>
    
    <script>
+   
+   var showhide = document.getElementById("showhidepub");
+
+   outputshow = true;
+
+   showhide.onclick = function(){
+		if(outputshow){
+			document.getElementById("output").style.display = "none";
+			outputshow = false;
+		} else {
+			document.getElementById("output").style.display = "block";
+			outputshow = true;
+		}
+
+   }
    
    function currentNetwork(){
 	let urlGet = window.location.href;
@@ -304,8 +323,8 @@
 				//create new qrcode with segwit address
 				new QRCode(document.getElementById("qrcode"+i), {
 					 text : ipubkey,
-					 width : 128,
-					 height : 128
+					 width : 192,
+					 height : 192
 				  });		
 				
 			}		

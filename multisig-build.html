@@ -14,13 +14,138 @@
 .wideinput{
 	width: 500px;
 }
+body, html {
+	padding: 12px;
+	font-family: "Verdana", "sans-serif";
+}
+a:link {
+text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+#share{
+	color: green;
+	font-size: 28px;
+	font-weight: bold;
+}
+#keep{
+	color: red;
+	font-size: 28px;
+	font-weight: bold;
+}
+#sweepcont{
+	width: 60%;
+}
+#wit{
+	background-color: black;
+	color: #ffeeff;
+}
+.label-default{
+	padding: 3px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	text-decoration: none;
+	color: #222;
+}
+.label-primary{
+	padding: 3px;
+	border: 1px solid #0088ff;
+	background-color: #0088ff;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+.label-success{
+	padding: 3px;
+	border: 1px solid #52BE80;
+	background-color: #52BE80;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+.label-reference{
+	padding: 3px;
+	border: 1px solid #333;
+	background-color: grey;
+	border-radius: 2px;
+	text-decoration: none;
+	color: white;
+}
+#qrcam{
+	display: none;
+}
+#qrnotify{
+        display: none;
+}
+ #qrnotify2{
+	display: none;
+}
+.hr {
+	height: 6px;
+	border: 0;
+	box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+.well{
+	padding: 16px;
+	border: 2px solid #aaa;
+	border-radius: 3px;
+	background-color: #ddd;
+	color: #000;
+	box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+input, select, option{
+	width: 60%;
+	border-radius: 4px; 
+	background-color: #eee;
+	padding: 7px;
+	font-size: 21px;
+	border: 1px solid #999;
+}
+.btn{
+	border-radius: 4px; 
+	background-color: #fff;
+	padding: 7px;
+	font-size: 21px;
+	border: 1px solid #999;
+	box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 1);
+}
+#progbar{
+	background-color: #5DADE2;
+	height: 20px;
+}
+.panel-primary{
+	border: 2px solid #5DADE2;
+	border-radius: 3px;
+}
+.panel-heading{
+	background-color: #5DADE2;
+	color: #fff;
+	padding: 5px;
+}
+.panel-danger{
+	border: 2px solid #EC7063;
+	border-radius: 3px;
+}
+.panel-headingd{
+	background-color: #EC7063;
+	color: #fff;
+	padding: 5px;
+}
+.panel-body{
+	padding: 3px;
+}
+.short{
+	width: 120px;
+}
 </style>
 </head>
 <body>
 <b>Select Network:</b> <select id="networkselect"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select><br>
 <b>Address:</b> <input type="text" id="address"><br>
 <b>Redeem Script: </b> <input type="text" id="redeemScript"><br>
-<button id="getutxo">GET UTXOs</button>
+<button id="getutxo" class="btn">GET UTXOs</button>
 <br>
 <textarea id="inputdata" cols="100" rows="10"></textarea><br>
 <script>
@@ -52,7 +177,7 @@ $("#getutxo").click(function(){
 
 </script>
 
-<br><br><button id="getaddr">LOAD</button>
+<br><br><button id="getaddr" class="btn">LOAD</button>
 <br><br>
 <b>Choose Which UTXOs to Spend:</b>
 <div id="utxobuttons"></div>
@@ -66,7 +191,7 @@ $("#getaddr").click(function(){
 		  for(var i=0;i<dataloop.length;i++){
 			$("#utxobuttons").append('<button class="input" value="'+i+'">'+dataloop[i].satoshis+'</button>');
 		  }
-		  $("#utxobuttons").append('<br><br><b>Total Satoshis Selected</b> <input type="text" id="amtsats" value="0" readonly><span id="btcval"></span><br><br><b>Output Address: </b><input type="text" id="outputaddr" class="wideinput"> <input type="text" id="outputamt" class="amountinputs"><br><br><b>Change Output: </b><input type="text" id="changeaddr" class="wideinput"> <input type="text" id="changeamt" class="amountinputs"><br><br><b>Miners Fee: </b><input type="text" id="feerate"> <span id="feewarn"></span> <br><br><button id="analyze">Build</button><br><br><textarea id="hexout" cols="100" rows="10"></textarea>');
+		  $("#utxobuttons").append('<br><br><b>Total Satoshis Selected</b> <input type="text" id="amtsats" value="0" readonly><span id="btcval"></span><br><br><b>Output Address: </b><input type="text" id="outputaddr" class="wideinput"> <input type="text" id="outputamt" class="amountinputs short"><br><br><b>Change Output: </b><input type="text" id="changeaddr" class="wideinput"> <input type="text" id="changeamt" class="amountinputs short"><br><br><b>Miners Fee: </b><input type="text" id="feerate" class="short"> <span id="feewarn"></span> <br><br><button id="analyze" class="btn">Build</button><br><br><textarea id="hexout" cols="100" rows="10"></textarea>');
 		  
 		      $(".input").click(function() {
 				console.log(this);
