@@ -4,7 +4,10 @@
 
 <script type="text/javascript" src="bitcoin.js"></script>
 <script type="text/javascript" src="buffer.js"></script>
-<script src="jquery.js"></script>
+<!-- QRCode Webcam Scanner -->
+<script type="text/javascript" src="instascan.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="jquery.js"></script>
 <style>
 .input { color: #fff;  height: 50px; background-color: #336699; }
 .green { background-color: #00cc00; }
@@ -142,6 +145,17 @@ input, select, option{
 .smalltxt{
 	font-size: 10px;
 }
+#satWarn{
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	top: 0px;
+	padding: 14px;
+	background-color: #EC7063;
+	color: #FFF;
+	display: none;
+	z-index: 2;
+}
 </style>
 </head>
 <body>
@@ -155,7 +169,8 @@ input, select, option{
 <br>
 <br>
 <b>Select Network:</b> <select id="networkselect"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select><br>
-<b>Address:</b> <input type="text" id="address"><br>
+<b>Address:</b> <input type="text" id="address"><button class="btn btn-default" onClick="return turnOnWC();">SCAN WITH WEBCAM</button><span id="qrnotify" class="label label-success">QR CODE SCANNED</span>
+<video id="qrcam"></video><br>
 <b>Redeem Script: </b> <input type="text" id="redeemScript"><br>
 <button id="getutxo" class="btn">GET UTXOs</button>
 <br>
@@ -189,12 +204,34 @@ $("#getutxo").click(function(){
 	  });
 });
 
+function turnOnWC(){
+    $("#qrcam").css("display","block");
+    var qr = new Instascan.Scanner({
+    video: document.getElementById("qrcam")
+    });
+
+    qr.addListener('scan', function(data){
+        document.getElementById("address").value = data;
+        if(document.getElementById("address").value.length > 20){
+            qr.stop();
+            $("#qrcam").css("display","none");
+            $("#qrnotify").css("display","block");
+        }
+    });    
+
+    Instascan.Camera.getCameras().then(function(cams){
+        qr.start(cams[0]);
+    }).catch(function(err){
+        console.log(err);
+    });    
+}   
 </script>
 
 <br><br><button id="getaddr" class="btn">LOAD</button>
 <br><br>
 <b>Choose Which UTXOs to Spend:</b>
 <div id="utxobuttons"></div>
+<div id="satWarn">Use Satoshis For Amounts</div>
 <script>
 $("#getaddr").click(function(){
 			
@@ -228,6 +265,14 @@ $("#getaddr").click(function(){
 					return recalcfees();
 				}
 					
+			  });
+			  
+			  //reminder to use satoshis in amount fieldset
+			  $(".amountinputs").focus(function(){
+				$("#satWarn").fadeIn(300);
+			  });
+			  $(".amountinputs").focusout(function(){
+				$("#satWarn").fadeOut(300);
 			  });
 			  
 			$(".amountinputs").change(function(){
