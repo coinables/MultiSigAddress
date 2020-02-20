@@ -139,13 +139,27 @@ input, select, option{
 .short{
 	width: 120px;
 }
+.smalltxt{
+	font-size: 10px;
+}
 </style>
 </head>
 <body>
+<h1 id="headerTxt">Build a MultiSig Transaction</h1>
+        <!-- introduction -->
+        <br>   
+            <div class="well">
+				This page uses a third-party to obtain Unspent Transaction Outputs (UTXO) on the Bitcoin blockchain. UTXOs contain 
+				the vital information needed to construct an unsigned transaction. After building your transaction on this page, copy the resulting transaction hex and proceed to the offline signing page.  
+            </div> 
+<br>
+<br>
 <b>Select Network:</b> <select id="networkselect"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select><br>
 <b>Address:</b> <input type="text" id="address"><br>
 <b>Redeem Script: </b> <input type="text" id="redeemScript"><br>
 <button id="getutxo" class="btn">GET UTXOs</button>
+<br>
+<p class="smalltxt"><em>UTXO data provided by <a href="https://blockchair.com">Blockchair.com</a></em></p>
 <br>
 <textarea id="inputdata" cols="100" rows="10"></textarea><br>
 <script>

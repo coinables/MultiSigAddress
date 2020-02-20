@@ -135,7 +135,17 @@ input, select, option{
 </style>
 </head>
 <body>
-
+<h1 id="headerTxt">Sign a MultiSig Transaction</h1>
+        <!-- introduction -->
+        <br>   
+            <div class="well">
+				This page will allow you to sign an unsigned or partially signed multisig transaction and is intended to run offline. 
+				<br><br>
+				If you are the last signor use the <b>Last Signature</b> button, otherwise use <b>Sign Incomplete</b>. For example, if you have a 3 of 4 multisig the first two signors would click Sign Incomplete, and the third signor would click Last Signature. 
+				<br><br>
+				After the Last Signature, copy the resulting transaction hex and broadcast it. You are responsible for broadcasting your transaction with a node, wallet, or 3rd party service (<a href="https://live.blockcypher.com/btc-testnet/pushtx/">Blockcypher</a>, Smartbit <a href="https://testnet.smartbit.com.au/txs/pushtx">Testnet</a> | <a href="https://www.smartbit.com.au/txs/pushtx">Mainnet</a>, Blockstream <a href="https://blockstream.info/testnet/tx/push">Testnet</a> | <a href="https://blockstream.info/tx/push">Mainnet</a>)
+            </div> 
+<br>
 <br>
 <b>Select Network:</b> <select id="networkselect"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select>
 <br>

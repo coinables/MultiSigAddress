@@ -208,7 +208,9 @@
 				MultiSigAddress.org is an <a href="https://github.com/coinables/multisigaddress"><span class="label label-primary">OPEN SOURCE</span></a> bitcoin paper wallet generator. This site uses <a href="https://github.com/coinables/buidljs">buidl.js</a> an easy to use layer on top of the <a href="https://github.com/bitcoinjs/bitcoinjs-lib"><span class="label label-success">BitcoinJS</span></a> library.
 				<br>
 				<br>
-				All of the functions on this page can be ran offline, by <a href="https://github.com/coinables/multisigaddress/releases">saving this site</a> and running the index.html file, except for the sweep function which requires internet access to check the UTXOs and broadcast to the network.
+				All of the functions on this page can be ran offline, by <a href="https://github.com/coinables/multisigaddress/releases">saving this site</a> and running the <span class="label label-reference">index.html</span> file. 
+				<br>
+				<br>This repository also contains a UTXO selecting transaction builder <span class="label label-reference">multisig-build.html</span>, and offline key signor <span class="label label-reference">multisig-sign.html</span>.  
 				<br>
 				<br>
 				You can enable testnet mode by adding  <span class="label label-reference">?testnet=true</span>  to the end of the url.
@@ -320,7 +322,7 @@
 				
 				document.getElementById("thispub"+i).innerHTML = "<br><div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>Public Key #"+(i+1)+"</h3></div><div class='panel-body'>" + ipubkey + "<input type='hidden' class='keysout' id='"+i+"' value='"+ikey+"'></div></div>";
 				 
-				//create new qrcode with segwit address
+				//create new qrcode with multisig address
 				new QRCode(document.getElementById("qrcode"+i), {
 					 text : ipubkey,
 					 width : 192,
