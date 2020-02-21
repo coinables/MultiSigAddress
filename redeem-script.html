@@ -146,6 +146,15 @@ input, select, option{
 </head>
 <body>
 <h1>Generate Redeem Script</h1>
+        <!-- introduction -->
+        <br>   
+            <div class="well">
+				<p>The redeem script is needed to build and sign a multisig transaction. You can save it to a USB stick when you generate your paper multisig wallet (easiest), or type it in by hand(very difficult), or regenerate it using the QR code scanners below(safest). </p>
+				<p>Generate a redeem script by providing all public keys in the same order used to create the multisig address and indicating the required number of signatures to spend. </p> 
+				<p>Public keys can be scanned with the QR codes generated with the original paper multisig wallet. Make sure to scan them in the same order as labeled on the paper wallet.</p>				
+            </div> 
+<br>
+<br>
 <div id="mainContainer">
 	<b>Select Network:</b> <select id="networkselect" class="short"><option value="testnet">Testnet</option><option value="mainnet">Mainnet</option></select>
 	<br>
