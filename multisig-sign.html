@@ -190,9 +190,9 @@ function signIncomplete(){
 	var redeemScript = buffer.bufferFrom(redeeminput);
 	var hexinput = document.getElementById("hexin").value;
 	const txb = b.bitcoin.TransactionBuilder.fromTransaction(b.bitcoin.Transaction.fromHex(hexinput), NETWORK);
-	//get number of inputs
-	var subhex = hexinput.substring(7,10);
-	var numberofinputs = parseInt(subhex);
+	//get number of inputs in hex (00 - ff)
+	var subhex = hexinput.substring(8,10); 
+	var numberofinputs = parseInt(subhex, 16); //set radix to 16 for hex	
 	
 	for(var i=0;i<numberofinputs;i++){
 		txb.sign(i, keyPair, redeemScript);
@@ -214,8 +214,9 @@ function signTx(){
 	var redeemScript = buffer.bufferFrom(redeeminput);
 	var hexinput = document.getElementById("hexin").value;
 	const txb = b.bitcoin.TransactionBuilder.fromTransaction(b.bitcoin.Transaction.fromHex(hexinput), NETWORK);
-	var subhex = hexinput.substring(7,10);
-	var numberofinputs = parseInt(subhex);
+	//get number of inputs in hex (00 - ff)
+	var subhex = hexinput.substring(8,10);
+	var numberofinputs = parseInt(subhex, 16); //set radix to 16 for hex	
 	
 	for(var i=0;i<numberofinputs;i++){
 		txb.sign(i, keyPair, redeemScript);
