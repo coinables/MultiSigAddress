@@ -2,6 +2,7 @@
  multisig paper wallet generator
 
 https://coinables.github.io/multisig
+Video demo: https://youtu.be/gF-F68ScnhQ
 
 With any bitcoin wallet, the most important part is the safety of user's funds. Part of the design process included what user input can be provided, and how much information to provide back to the user. The more steps or parts to the process opens up the user to more chances to make mistakes.
 
